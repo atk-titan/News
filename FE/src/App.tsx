@@ -4,17 +4,6 @@ import Card from './Components/Card';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
-interface Article {
-  source: { id: string | null; name: string };
-  author: string;
-  title: string;
-  description: string;
-  url: string;
-  urlToImage: string;
-  publishedAt: string;
-  content: string;
-}
-
 const App: React.FC = () => {
 
   const [input,setInput] = useState("");
@@ -24,13 +13,13 @@ const App: React.FC = () => {
   async function serverCheck(q:string){
     if(q===""){
       const res = await axios.get('http://localhost:3000/news');
-      setNews(res.data);
-      return res.data;
+      setNews(res.data.allArticles);
+      return res.data.allArticles;
     }
     else{
       const res = await axios.get(`http://localhost:3000/news?q=${q}`);
-      setNews(res.data);
-      return res.data;
+      setNews(res.data.allArticles);
+      return res.data.allArticles;
     }
   }
 
@@ -47,23 +36,27 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className='h-full w-screen bg-black text-white px-8 py-4 '>
-      <div className='flex justify-between'>
+    <div className='h-full w-full bg-gray-100 text-gray-950 px-8 py-4'>
+      <div className='relative flex justify-between'>
         <Heading heading='News Letter' />
-        <div>
-          <input type="text" className='border border-gray-400 rounded px-3 p-1' placeholder='Search Param' onChange={(e)=>{setInput(e.target.value)
+        <div className='flex items-center gap-4'>
+          <input type="text" className='border border-gray-400 rounded px-3 p-1' placeholder='Search Param' onChange={(e)=>{setInput(e.target.value) 
             console.log(input);
-          }}/>
-          <button onClick={clickHandler}>Search</button>
+          }}
+          onKeyDown={(e)=>{
+            if(e.key === "Enter")
+              clickHandler()
+          }}
+          />
+          <button onClick={clickHandler} className=' bg-gray-950 text-gray-100 px-3 py-1 rounded'>Search</button>
         </div>
-
       </div>
-      <div className='grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-15'>
+      <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-15'>
         {!isLoading && data!==undefined && news.map((article:any, index:number) => (
           <div className='px-10'>
             <Card key={index} article={article} />
           </div>
-        ))}
+        ))} 
       </div>
     </div>
   );
