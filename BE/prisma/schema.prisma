@@ -18,7 +18,7 @@ model NewsArticle {
   author String?
   title String
   description String?
-  url String
+  url String @unique
   urlToImage String?
   publishedAt String
   content String?
@@ -29,8 +29,7 @@ model NewsArticle {
 
 model Source{
   sourceId String @id @default(uuid())
-  id String?
-  name String 
+  name String @unique 
 
   articles NewsArticle[]
 }

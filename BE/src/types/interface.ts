@@ -11,6 +11,5 @@ export interface Article{
 }
 
 interface Source{
-    id: string | null;
     name: string ;
 }

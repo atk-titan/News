@@ -19,6 +19,7 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "nodemon": "^3.1.10",
+    "p-limit": "^6.2.0",
     "typescript": "^5.9.2"
   },
   "devDependencies": {

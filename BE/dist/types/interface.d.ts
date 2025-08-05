@@ -9,7 +9,6 @@ export interface Article {
     source: Source;
 }
 interface Source {
-    id: string | null;
     name: string;
 }
 export {};

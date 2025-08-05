@@ -2,7 +2,7 @@
 
 This project is divided into two parts:
 
-- 📦 **Backend (BE)** — Node.js (with Express or any backend stack you're using)
+- 📦 **Backend (BE)** — Node.js (with Express )
 - 💻 **Frontend (FE)** — React (with Vite or CRA)
 
 ---
