@@ -27,7 +27,6 @@ app.get("/news", async (req, res) => {
         let newArticles = [];
         if (articles.length < 7 || new Date(articles[0]?.publishedAt) < new Date()) {
             const currTime = new Date().toISOString();
-            // newArticles.push(fetchAndStoreArticles(qStr,articles[0]?.publishedAt as string,currTime));
             newArticles = await fetchAndStoreArticles(qStr, articles[0]?.publishedAt, currTime);
         }
         const allArticles = [...articles, ...newArticles];

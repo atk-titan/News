@@ -1,9 +1,9 @@
 import { prismaClient } from "../client/prismaClient.js";
 import type { Article } from "../types/interface.js";
-import { getEndpoint } from "./endpoint.js";
 import pLimit from "p-limit";
+import { fetchData } from "./fetchData.js";
 
-const limit = pLimit(8);
+const parallel = pLimit(8);
 
 export const fetchAndStoreArticles = async (
   qStr: string,
@@ -11,13 +11,11 @@ export const fetchAndStoreArticles = async (
   to: string
 ) => {
   try {
-    const reqUrl = getEndpoint(qStr, from, to);
-    const response = await fetch(reqUrl);
-    const data = await response.json();
-    const articles: Article[] = data.articles;
+
+    const articles: Article[] = await fetchData(qStr,from,to);
 
     const tasks = articles.map((article) =>
-      limit(() =>
+      parallel(() =>
         prismaClient.newsArticle.upsert({
           where: {
             url: article.url, 

@@ -37,7 +37,7 @@ const App: React.FC = () => {
 
   return (
     <div className='h-full w-full bg-gray-100 text-gray-950 px-8 py-4'>
-      <div className='relative flex justify-between'>
+      <div className='relative flex justify-between mb-8 mt-2'>
         <Heading heading='News Letter' />
         <div className='flex items-center gap-4'>
           <input type="text" className='border border-gray-400 rounded px-3 p-1' placeholder='Search Param' onChange={(e)=>{setInput(e.target.value) 
@@ -51,7 +51,7 @@ const App: React.FC = () => {
           <button onClick={clickHandler} className=' bg-gray-950 text-gray-100 px-3 py-1 rounded'>Search</button>
         </div>
       </div>
-      <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-15'>
+      <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4'>
         {!isLoading && data!==undefined && news.map((article:any, index:number) => (
           <div className='px-10'>
             <Card key={index} article={article} />
