@@ -15,6 +15,7 @@ interface Source {
 }
 
 const Card = ({ article }: { article: Article }) => {
+
   return (
     <a
       href={article.url}
@@ -22,19 +23,19 @@ const Card = ({ article }: { article: Article }) => {
       rel="noopener noreferrer"
       className="block"
     >
-      <div className="relative group h-140 shadow-md rounded-2xl overflow-hidden hover:shadow-xl duration-500 border border-white transition-transform hover:scale-[1.01] flex flex-col">
+      <div className="relative group h-130 shadow-md rounded-2xl overflow-hidden hover:shadow-xl duration-500 border-b-4 border-b-white transition-transform hover:scale-[1.01] flex flex-col">
         {article.author && (
           <div className="absolute top-2 left-3 text-white bg-black/50 backdrop-blur-sm px-2 py-1 rounded-lg shadow-md">
             <div className="text-xs text-gray-300 uppercase tracking-wide">
               Author
             </div>
             <div className="text-sm font-semibold">
-              {article.author}
+              { article.author.length < 16 ? article.author : article.author.slice(0,13) + "..." }
             </div>
           </div>
         )}
 
-        <div className="h-88 group-hover:h-48 w-full overflow-hidden transition-all ease-in-out duration-500">
+        <div className="h-80 group-hover:h-48 w-full overflow-hidden transition-all ease-in-out duration-500">
           <img
             src={article.urlToImage || "/road-4348087.jpg"}
             alt="image not found"
@@ -54,7 +55,7 @@ const Card = ({ article }: { article: Article }) => {
           </div>
 
           <div className="flex justify-between items-center text-xs text-gray-500 mt-3">
-            {article.source?.name && <span>{article.source.name}</span>}
+            {article.source?.name && <span >{article.source.name}</span>}
             <span>{new Date(article.publishedAt).toLocaleDateString()}</span>
           </div>
         </div>

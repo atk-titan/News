@@ -1,8 +1,11 @@
 import React from 'react'
 
-const Heading = ({heading}:{heading:string}) => {
+const Heading = ({heading , children}:{heading:string , children?: React.ReactNode}) => {
   return (
-      <h1 className='text-4xl font-bold w-fit'>{heading}</h1>
+    <div>
+      <h1 className={`inline font-bold w-fit`}>{heading}</h1>
+      {children}
+    </div>
   )
 }
 

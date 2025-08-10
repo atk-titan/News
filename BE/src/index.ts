@@ -29,13 +29,19 @@ app.get("/news", async (req,res)=>{
             },
             orderBy:{
                 publishedAt: "desc"
+            },
+            include:{
+                source: true
             }
         });
         
         let newArticles:Article[]=[];
         if( articles.length < 7 || new Date(articles[0]?.publishedAt as string) < new Date()){
             const currTime = new Date().toISOString();
-            newArticles = await fetchAndStoreArticles(qStr,articles[0]?.publishedAt as string,currTime)
+
+            fetchAndStoreArticles(qStr,articles[0]?.publishedAt as string,currTime).then((data)=>{
+                newArticles = data;
+            });
         }
 
         const allArticles = [...articles,...newArticles];
